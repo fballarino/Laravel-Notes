@@ -1,0 +1,28 @@
+SELECT m.member_name as MAIN, m.member_id as id, c.character_name_realm as Toon FROM tbl_members as m 
+JOIN tbl_characters as c 
+WHERE c.character_member_id = m.member_id
+AND m.member_id = 1
+
+SELECT SUM(p.payment_amount) as "Total Paid", m.member_name FROM tbl_payments as p
+JOIN tbl_members as m
+WHERE p.payment_member_id = m.member_id
+ORDER BY m.member_name ASC
+
+SELECT  m.member_name, p.payment_amount, p.payment_desc ,pd.payment_description FROM tbl_payments as p
+JOIN tbl_members as m
+JOIN tbl_payment_descriptions as pd
+ON p.payment_member_id = m.member_id
+AND p.payment_desc = pd.payment_description_id
+
+SELECT m.member_name as Booster, 
+p.payment_id as id, p.payment_amount as Amount, p.payment_created_at as Date, p.payment_issued_by as Accountant, p.payment_note as Note,
+pd.payment_description as Causal, pd.payment_code as Code
+FROM tbl_members as m
+JOIN tbl_payments as p
+ON m.member_id = p.payment_member_id
+JOIN tbl_payment_descriptions as pd
+ON p.payment_desc = pd.payment_description_id
+WHERE p.payment_member_id = m.member_id
+ORDER BY p.payment_created_at DESC
+
+0Ljr5jUJUClhfUqe
